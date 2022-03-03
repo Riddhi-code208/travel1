@@ -1,4 +1,5 @@
 const Post = require('../models/postmodel');
+const User = require('../models/usermodel');
 
 module.exports = {
     index: (req, res) => {
@@ -14,7 +15,20 @@ module.exports = {
         res.send("registration page");
     },
     registerpost: (req, res) => {
-        res.send("registration successful");
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: req.body.password,
+            role: req.body.role,
+        });
+        newUser.save()
+            .then(res => {
+                console.log("submited", res);
+            }).catch(err => {
+                console.log("not submited", err);
+            });
+        res.end();
     },
     postspost: (req, res) => {
         const newPost = new Post({
