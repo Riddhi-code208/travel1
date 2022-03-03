@@ -1,2 +1,32 @@
-const express=require('express');
-const app=express();
+const { urlencoded, response } = require('express');
+const express = require('express');
+const path = require('path');
+const mongoose = require('mongoose');
+const { port, mongodburl } = require('./config/configuration');
+const app = express();
+
+//configure mongoose 
+mongoose.connect(mongodburl, { useNewUrlParser: true })
+    .then(res => {
+        console.log("database connected");
+    }).catch(err => {
+        console.log("database disconnected", err);
+    });
+
+
+//configure middleware
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+//routes
+const adminroutes = require('./routes/adminroutes');
+const userroutes = require('./routes/userroutes');
+app.use("/", adminroutes);
+app.use("/user", userroutes);
+
+//server listening
+app.listen(port, () => {
+    console.log('running server at', port);
+});
