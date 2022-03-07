@@ -1,7 +1,7 @@
 const Post = require('../models/postmodel');
 const User = require('../models/usermodel');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
+
 
 module.exports = {
     index: (req, res) => {
@@ -40,6 +40,7 @@ module.exports = {
             });
         res.end();
     },
+    
     postspost: (req, res) => {
         const newPost = new Post({
             title: req.body.title,
