@@ -2,7 +2,7 @@ const { urlencoded, response } = require('express');
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const { port, mongodburl } = require('./config/configuration');
+const { port, mongodburl,host} = require('./config/configuration');
 const app = express();
 
 //configure mongoose 
@@ -27,7 +27,7 @@ app.use("/", adminroutes);
 app.use("/user", userroutes);
 
 //server listening
-app.listen(port, () => {
+app.listen(port,host, () => {
     console.log('running server at', port);
 });
 
