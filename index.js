@@ -30,3 +30,5 @@ app.use("/user", userroutes);
 app.listen(port, () => {
     console.log('running server at', port);
 });
+
+module.exports=app;

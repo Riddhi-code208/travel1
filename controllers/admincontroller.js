@@ -1,5 +1,7 @@
 const Post = require('../models/postmodel');
 const User = require('../models/usermodel');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 module.exports = {
     index: (req, res) => {
@@ -9,17 +11,25 @@ module.exports = {
         res.send("login page");
     },
     loginpost: (req, res) => {
-        res.send("login successful");
+        req.session.save((err) => {
+            if (err) {
+                return next(err);
+            }
+            res.redirect('/');
+        });
+
     },
     registerget: (req, res) => {
         res.send("registration page");
     },
     registerpost: (req, res) => {
+        const salt = bcrypt.genSaltSync();
+        const hash = bcrypt.hashSync(req.body.password, salt);
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
-            password: req.body.password,
+            password: hash,
             role: req.body.role,
         });
         newUser.save()
