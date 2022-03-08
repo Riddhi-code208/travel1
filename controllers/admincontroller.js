@@ -1,7 +1,8 @@
 const Post = require('../models/postmodel');
 const User = require('../models/usermodel');
 const bcrypt = require('bcrypt');
-
+const mongoose = require('mongoose');
+const { db } = require('../models/postmodel');
 
 module.exports = {
     index: (req, res) => {
@@ -20,7 +21,11 @@ module.exports = {
 
     },
     registerget: (req, res) => {
-        res.send("registration page");
+        db.collection("users").find().toArray((err, result)=> {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+          });
     },
     registerpost: (req, res) => {
         const salt = bcrypt.genSaltSync();
@@ -38,7 +43,7 @@ module.exports = {
             }).catch(err => {
                 console.log("not submited", err);
             });
-        res.end();
+        res.send("inserted");
     },
     
     postspost: (req, res) => {
@@ -53,9 +58,13 @@ module.exports = {
             }).catch(err => {
                 console.log("not submited", err);
             });
-        res.end();
+        res.send("inserted");
     },
     postsget: (req, res) => {
-        res.send("post get successful");
+        db.collection("posts").find().toArray((err, result)=> {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+          });
     }
 }
