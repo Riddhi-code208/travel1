@@ -1,6 +1,7 @@
 const express = require('express');
 const admincontroller = require('../controllers/admincontroller');
 const emailcontroller = require('../controllers/emailcontroller');
+const uploadimagecontroller = require('../controllers/uploadimagecontroller');
 const routes = express.Router();
 
 routes.route('/')
@@ -18,4 +19,6 @@ routes.route('/posts')
     .post(admincontroller.postspost);
 routes.route('/email')
     .post(emailcontroller.sendemail);
+routes.route('/uploadimage')
+    .post(uploadimagecontroller.uploadimage);
 module.exports = routes;
