@@ -20,5 +20,6 @@ routes.route('/posts')
 routes.route('/email')
     .post(emailcontroller.sendemail);
 routes.route('/uploadimage')
+.get(uploadimagecontroller.getuploadimage)
     .post(uploadimagecontroller.uploadimage);
 module.exports = routes;

@@ -20,6 +20,8 @@ app.use(urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'upload')));
 
+//configure views engine
+app.set('view engine', 'ejs')
 
 //routes
 const adminroutes = require('./routes/adminroutes');
