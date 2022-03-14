@@ -1,17 +1,21 @@
 const { urlencoded, response } = require('express');
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
-const { port, mongodburl,host} = require('./config/configuration');
+const { port,host} = require('./config/configuration');
 const app = express();
 
-//configure mongoose 
-mongoose.connect(mongodburl, { useNewUrlParser: true })
-    .then(res => {
-        console.log("database connected",mongodburl);
-    }).catch(err => {
-        console.log("database disconnected", err);
-    });
+//configure postgres
+const { Client } = require('pg');
+
+const client = new Client({
+    user: 'riddhi',
+    host: 'localhost',
+    database: 'travel',
+    password: 'riddhi123',
+    port: 5432,
+});
+
+client.connect(console.log("connected"));
 
 
 //configure middleware
