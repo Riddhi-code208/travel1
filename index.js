@@ -1,13 +1,21 @@
 const { urlencoded, response } = require('express');
 const express = require('express');
 const path = require('path');
-const pg = require('pg');
 const { port,host} = require('./config/configuration');
 const app = express();
 
-//configure mongoose 
-const pg = new pg();
-pg.connect();
+//configure postgres
+const { Client } = require('pg');
+
+const client = new Client({
+    user: 'riddhi',
+    host: 'localhost',
+    database: 'travel',
+    password: 'riddhi123',
+    port: 5432,
+});
+
+client.connect();
 
 
 //configure middleware
