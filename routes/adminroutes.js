@@ -17,6 +17,9 @@ routes.route('/register')
 routes.route('/posts')
     .get(admincontroller.postsget)
     .post(admincontroller.postspost);
+routes.route('/posts/:id')
+    .get(admincontroller.postsgetbytitle)
+   // .post(admincontroller.postspostbytitle);
 routes.route('/email')
     .post(emailcontroller.sendemail);
 routes.route('/uploadimage')

@@ -23,13 +23,18 @@ module.exports = {
             }
         })
     },
-    getuploadimage: (req, res, next) => {
-        uploadimagemodel.find({},(err,image)=> {
+    getuploadimage: (req, res) => {
+        uploadimagemodel.find((err,image)=> {
             if (err) return next(err);
             else
-            res.render('page', {
-                image: image.toString('base64')
-              })
+            console.log(image);
+            var receiveImage = function(image,success) {
+                socket.broadcast({
+                    data: image.data.toString('base64'),
+                    width: image.width,
+                    height:image.height
+                });}
+            res.render('page', {receiveImage})
         });
     }
 }

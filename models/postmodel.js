@@ -5,13 +5,13 @@ const Postschema = new Schema({
        type :String,
        require:true
    },
-   description : {
+   subtitle : {
     type :String,
     require:true
    },
-   status:{
+   description:{
     type :String,
-    default:'public'
+    require:true
    },
    createDate:{
        type:Date,

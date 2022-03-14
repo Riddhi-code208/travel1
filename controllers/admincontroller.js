@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const { db } = require('../models/postmodel');
 const { query } = require('express');
-
+const postmodel = require('../models/postmodel');
+const mongo=require('mongodb');
 module.exports = {
     index: (req, res) => {
-        res.send("welcome");
+        res.render('home1');
     },
     loginpost: (req, res) => {
 
@@ -56,9 +57,10 @@ module.exports = {
 
     postspost: (req, res) => {
         const newPost = new Post({
+            post_id:req.body.id,
             title: req.body.title,
+            subtitle: req.body.subtitle,
             description: req.body.description,
-            status: req.body.status,
         });
         newPost.save()
             .then(res => {
@@ -66,11 +68,22 @@ module.exports = {
             }).catch(err => {
                 console.log("not submited", err);
             });
-        res.send("inserted");
+        res.json({title: 'NewTitle'});
     },
     postsget: (req, res) => {
-        db.collection("posts").find().toArray((err, result) => {
+        postmodel.find((err, result) => {
             if (err) throw err;
+            console.log(result);
+            res.render('home',{result1:result});
+        });
+    },
+    postsgetbytitle: (req, res) => {
+        const id = req.params.id;
+        console.log(id);
+        var o_id = mongo.ObjectId(id);
+        console.log(o_id)
+        postmodel.findById(o_id,(err, result) => {
+            if (err) {console.log(err)};
             console.log(result);
             res.send(result);
         });
