@@ -15,7 +15,7 @@ const client = new Client({
     port: 5432,
 });
 
-client.connect();
+client.connect(console.log("connected"));
 
 
 //configure middleware
