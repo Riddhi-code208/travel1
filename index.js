@@ -1,17 +1,13 @@
 const { urlencoded, response } = require('express');
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
+const pg = require('pg');
 const { port, mongodburl,host} = require('./config/configuration');
 const app = express();
 
 //configure mongoose 
-mongoose.connect(mongodburl, { useNewUrlParser: true })
-    .then(res => {
-        console.log("database connected",mongodburl);
-    }).catch(err => {
-        console.log("database disconnected", err);
-    });
+const pg = new pg();
+pg.connect();
 
 
 //configure middleware
