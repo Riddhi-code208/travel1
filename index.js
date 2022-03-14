@@ -6,12 +6,12 @@ const { port, mongodburl,host} = require('./config/configuration');
 const app = express();
 
 //configure mongoose 
-// mongoose.connect(mongodburl, { useNewUrlParser: true })
-//     .then(res => {
-//         console.log("database connected",mongodburl);
-//     }).catch(err => {
-//         console.log("database disconnected", err);
-//     });
+mongoose.connect(mongodburl, { useNewUrlParser: true })
+    .then(res => {
+        console.log("database connected",mongodburl);
+    }).catch(err => {
+        console.log("database disconnected", err);
+    });
 
 
 //configure middleware
