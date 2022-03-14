@@ -2,7 +2,7 @@ const { urlencoded, response } = require('express');
 const express = require('express');
 const path = require('path');
 const pg = require('pg');
-const { port, mongodburl,host} = require('./config/configuration');
+const { port,host} = require('./config/configuration');
 const app = express();
 
 //configure mongoose 
